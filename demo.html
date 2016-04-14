@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>face-swiping</title>
+        <script src="public/lib/dat.gui.min.js"></script>
+        <script src="public/lib/facepp-sdk.js"></script>
+    </head>
+    <body>
+        <pre id="response">Loading...</pre>
+
+        <script>
+
+            (function() {
+                // TODO 初始化控制器内容
+                var controls = new function () {
+                    this.detect = function () {
+                        //检测
+                        var api = new FacePP('7904f93dd9c8fb93a0f45e9ff8b1be27', 't0b5dlpwjFy98P6ix2lCnX79dq36N4sb');
+                        api.request('detection/detect', {
+                            url: 'http://cn.faceplusplus.com/static/resources/python_demo/1.jpg'
+                        }, function(err, result) {
+                            if (err) {
+                                // TODO handle error
+                                return;
+                            }
+                            // TODO use result
+                            document.getElementById('response').innerHTML = JSON.stringify(result, null, 2);
+                        });
+
+                    }
+                };
+
+                // TODO 初始化GUI
+                var gui = new dat.GUI();
+                gui.add(controls,'detect')
+
+            })();
+        </script>
+    </body>
+</html>
